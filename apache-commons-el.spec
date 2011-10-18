@@ -16,9 +16,9 @@ Source1:        http://repo1.maven.org/maven2/%{short_name}/%{short_name}/%{vers
 Patch0:         %{short_name}-%{version}-license.patch
 Patch1:         %{short_name}-eclipse-manifest.patch
 Patch2:         %{short_name}-enum.patch
-Requires(post): jpackage-utils
-Requires(postun): jpackage-utils
-BuildRequires:  jpackage-utils >= 0:1.6
+Requires(post): jpackage-utils >= 0:1.7.5
+Requires(postun): jpackage-utils >= 0:1.7.5
+BuildRequires:  jpackage-utils >= 0:1.7.5
 BuildRequires:  ant
 BuildRequires:  tomcat6-jsp-2.1-api
 BuildRequires:  tomcat6-servlet-2.5-api
@@ -37,7 +37,7 @@ javax.servlet.jsp.el which is part of the JSP 2.0 specification.
 %package        javadoc
 Summary:        API documentation for %{name}
 Group:          Development/Java
-Requires:       jpackage-utils
+Requires:       jpackage-utils >= 0:1.7.5
 
 Provides:       jakarta-%{short_name}-javadoc = 0:%{version}-%{release}
 Obsoletes:      jakarta-%{short_name}-javadoc < 0:%{version}-%{release}

@@ -5,7 +5,7 @@
 
 Name:           apache-%{short_name}
 Version:        1.0
-Release:        23
+Release:        22
 Summary:        The Apache Commons Extension Language
 License:        ASL 1.1
 Group:          Development/Java
@@ -16,9 +16,9 @@ Source1:        http://repo1.maven.org/maven2/%{short_name}/%{short_name}/%{vers
 Patch0:         %{short_name}-%{version}-license.patch
 Patch1:         %{short_name}-eclipse-manifest.patch
 Patch2:         %{short_name}-enum.patch
-Requires(post): jpackage-utils >= 0:1.7.5
-Requires(postun): jpackage-utils >= 0:1.7.5
-BuildRequires:  jpackage-utils >= 0:1.7.5
+Requires(post): jpackage-utils
+Requires(postun): jpackage-utils
+BuildRequires:  jpackage-utils >= 0:1.6
 BuildRequires:  ant
 BuildRequires:  tomcat6-jsp-2.1-api
 BuildRequires:  tomcat6-servlet-2.5-api
@@ -37,7 +37,7 @@ javax.servlet.jsp.el which is part of the JSP 2.0 specification.
 %package        javadoc
 Summary:        API documentation for %{name}
 Group:          Development/Java
-Requires:       jpackage-utils >= 0:1.7.5
+Requires:       jpackage-utils
 
 Provides:       jakarta-%{short_name}-javadoc = 0:%{version}-%{release}
 Obsoletes:      jakarta-%{short_name}-javadoc < 0:%{version}-%{release}

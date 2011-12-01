@@ -75,12 +75,12 @@ export OPT_JAR_LIST=:
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 # jars
-install -d -m 755 $RPM_BUILD_ROOT%{_javadir}
-install -p -m 644 dist/%{short_name}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
-pushd $RPM_BUILD_ROOT%{_javadir}
+install -d -m 755 %{buildroot}%{_javadir}
+install -p -m 644 dist/%{short_name}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
+pushd %{buildroot}%{_javadir}
 for jar in *-%{version}*; do
     ln -sf ${jar} `echo $jar| sed "s|apache-||g"`
     ln -sf ${jar} `echo $jar| sed "s|-%{version}||g"`
@@ -97,14 +97,14 @@ install -pD -T -m 644 %{SOURCE1} %{buildroot}%{_mavenpomdir}/JPP-%{short_name}.p
 %add_to_maven_depmap commons-el commons-el %{version} JPP %{short_name}
 
 # javadoc
-install -d -m 755 $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-cp -pr dist/docs/api/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
-ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
+install -d -m 755 %{buildroot}%{_javadocdir}/%{name}-%{version}
+cp -pr dist/docs/api/* %{buildroot}%{_javadocdir}/%{name}-%{version}
+ln -s %{name}-%{version} %{buildroot}%{_javadocdir}/%{name}
 
 
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post
 %update_maven_depmap

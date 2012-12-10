@@ -1,11 +1,10 @@
-
 %global base_name       el
 %global short_name      commons-%{base_name}
 
 
 Name:           apache-%{short_name}
 Version:        1.0
-Release:        25
+Release:        22
 Summary:        The Apache Commons Extension Language
 License:        ASL 1.1
 Group:          Development/Java
@@ -23,8 +22,7 @@ BuildRequires:  ant
 BuildRequires:  tomcat6-jsp-2.1-api
 BuildRequires:  tomcat6-servlet-2.5-api
 BuildRequires:  junit
-
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:  java-1.6.0-openjdk-devel
 
 # This should go away with F-17
 Provides:       jakarta-%{short_name} = 0:%{version}-%{release}
@@ -68,19 +66,19 @@ EOBP
 %build
 export CLASSPATH=
 export OPT_JAR_LIST=:
-%{ant} \
+ant \
   -Dfinal.name=%{short_name} \
   -Dj2se.javadoc=%{_javadocdir}/java \
   jar javadoc
 
 
 %install
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 # jars
-install -d -m 755 %{buildroot}%{_javadir}
-install -p -m 644 dist/%{short_name}.jar %{buildroot}%{_javadir}/%{name}-%{version}.jar
-pushd %{buildroot}%{_javadir}
+install -d -m 755 $RPM_BUILD_ROOT%{_javadir}
+install -p -m 644 dist/%{short_name}.jar $RPM_BUILD_ROOT%{_javadir}/%{name}-%{version}.jar
+pushd $RPM_BUILD_ROOT%{_javadir}
 for jar in *-%{version}*; do
     ln -sf ${jar} `echo $jar| sed "s|apache-||g"`
     ln -sf ${jar} `echo $jar| sed "s|-%{version}||g"`
@@ -97,14 +95,14 @@ install -pD -T -m 644 %{SOURCE1} %{buildroot}%{_mavenpomdir}/JPP-%{short_name}.p
 %add_to_maven_depmap commons-el commons-el %{version} JPP %{short_name}
 
 # javadoc
-install -d -m 755 %{buildroot}%{_javadocdir}/%{name}-%{version}
-cp -pr dist/docs/api/* %{buildroot}%{_javadocdir}/%{name}-%{version}
-ln -s %{name}-%{version} %{buildroot}%{_javadocdir}/%{name}
+install -d -m 755 $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+cp -pr dist/docs/api/* $RPM_BUILD_ROOT%{_javadocdir}/%{name}-%{version}
+ln -s %{name}-%{version} $RPM_BUILD_ROOT%{_javadocdir}/%{name}
 
 
 
 %clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 %post
 %update_maven_depmap

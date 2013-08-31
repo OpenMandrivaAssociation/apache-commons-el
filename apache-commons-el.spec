@@ -4,14 +4,14 @@
 
 Name:           apache-%{short_name}
 Version:        1.0
-Release:        22
+Release:        23
 Summary:        The Apache Commons Extension Language
 License:        ASL 1.1
 Group:          Development/Java
 URL:            http://commons.apache.org/%{base_name}
 BuildArch:      noarch
 Source0:        http://archive.apache.org/dist/commons/%{base_name}/source/%{short_name}-%{version}-src.tar.gz
-Source1:        http://repo1.maven.org/maven2/%{short_name}/%{short_name}/%{version}/%{short_name}-%{version}.pom
+Source1:        %{short_name}-%{version}.pom
 Patch0:         %{short_name}-%{version}-license.patch
 Patch1:         %{short_name}-eclipse-manifest.patch
 Patch2:         %{short_name}-enum.patch
@@ -19,8 +19,8 @@ Requires(post): jpackage-utils
 Requires(postun): jpackage-utils
 BuildRequires:  jpackage-utils >= 0:1.6
 BuildRequires:  ant
-BuildRequires:  tomcat6-jsp-2.1-api
-BuildRequires:  tomcat6-servlet-2.5-api
+BuildRequires:  tomcat-jsp-2.2-api
+BuildRequires:  tomcat-servlet-3.0-api
 BuildRequires:  junit
 BuildRequires:  java-1.6.0-openjdk-devel
 
@@ -57,8 +57,8 @@ find . -type f -name "*.jar" -exec rm -f {} \;
 cat > build.properties <<EOBP
 build.compiler=modern
 junit.jar=$(build-classpath junit)
-servlet-api.jar=$(build-classpath tomcat6-servlet-2.5-api)
-jsp-api.jar=$(build-classpath tomcat6-jsp-2.1-api)
+servlet-api.jar=$(build-classpath tomcat-servlet-3.0-api)
+jsp-api.jar=$(build-classpath tomcat-jsp-2.2-api)
 servletapi.build.notrequired=true
 jspapi.build.notrequired=true
 EOBP

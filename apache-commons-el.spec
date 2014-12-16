@@ -5,7 +5,8 @@
 
 Name:           apache-%{short_name}
 Version:        1.0
-Release:        29.0%{?dist}
+Release:        30.1
+Group:		Development/Java
 Summary:        The Apache Commons Extension Language
 License:        ASL 1.1
 URL:            http://commons.apache.org/%{base_name}
@@ -79,12 +80,11 @@ install -pD -T -m 644 %{SOURCE1} %{buildroot}%{_mavenpomdir}/JPP-%{short_name}.p
 install -d -m 755 %{buildroot}%{_javadocdir}/%{name}
 cp -pr dist/docs/api/* %{buildroot}%{_javadocdir}/%{name}
 
-%files
+%files -f .mfiles
 %doc LICENSE.txt STATUS.html
 %{_javadir}/%{name}.jar
 %{_javadir}/%{short_name}.jar
 %{_mavenpomdir}/JPP-%{short_name}.pom
-%{_mavendepmapfragdir}/%{name}
 
 %files javadoc
 %doc LICENSE.txt
@@ -92,6 +92,9 @@ cp -pr dist/docs/api/* %{buildroot}%{_javadocdir}/%{name}
 
 
 %changelog
+* Wed May 21 2014 Mikolaj Izdebski <mizdebsk@redhat.com> - 1.0-30
+- Use .mfiles generated during build
+
 * Tue Oct 08 2013 Stanislav Ochotnicky <sochotnicky@redhat.com> - 1.0-29
 - Remove versioned symlinks
 - Add workaround for rhbz#1015612

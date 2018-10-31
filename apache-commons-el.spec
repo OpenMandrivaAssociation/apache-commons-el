@@ -5,7 +5,7 @@
 
 Name:           apache-%{short_name}
 Version:        1.0
-Release:        30.2
+Release:        30.3
 Group:		Development/Java
 Summary:        The Apache Commons Extension Language
 License:        ASL 1.1

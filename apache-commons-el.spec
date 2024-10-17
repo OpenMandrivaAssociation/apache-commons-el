@@ -9,7 +9,7 @@ Release:        30.3
 Group:		Development/Java
 Summary:        The Apache Commons Extension Language
 License:        ASL 1.1
-URL:            http://commons.apache.org/%{base_name}
+URL:            https://commons.apache.org/%{base_name}
 BuildArch:      noarch
 Source0:        http://archive.apache.org/dist/commons/%{base_name}/source/%{short_name}-%{version}-src.tar.gz
 Source1:        http://repo1.maven.org/maven2/%{short_name}/%{short_name}/%{version}/%{short_name}-%{version}.pom
